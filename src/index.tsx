@@ -6,8 +6,12 @@ import useQuery from './use-query'
 const random = () => Math.ceil((Math.random() * (10 - 1) + 1))
 
 const Entry = () => {
-  const [query, setQuery] = useQuery({
-    ids: 'array',
+  const [query, setQuery] = useQuery<{
+    ids?: number[],
+    size?: number,
+    next?: number,
+  }>({
+    ids: 'number[]',
     size: 'number',
   })
 
