@@ -28,8 +28,8 @@ function useQuery<T extends QueryObject>(types?: Partial<Types<T>>) {
           return
         }
         if (type === 'string[]' || type === 'number[]') {
-          next[key] = current.includes(',') ? current.split(',') : undefined
-          if (next[key] && type === 'number[]') {
+          next[key] = current.includes(',') ? current.split(',') : []
+          if ((next[key] as string[]).length && type === 'number[]') {
             next[key] = (next[key] as string[]).map((t) => Number(t))
           }
         }
@@ -43,14 +43,14 @@ function useQuery<T extends QueryObject>(types?: Partial<Types<T>>) {
     setQuery(next)
   }, [search])
 
-  const set = (args: T, replace?: boolean) => {
+  const set = (args: Partial<T>, replace?: boolean) => {
     const next = replace ? args : { ...queryArgs.current, ...args }
     queryArgs.current = next
     const query = new URLSearchParams(next as Record<string, any>)
     history.replace({ search: query.toString() })
   }
 
-  return [query, set] as [T | undefined, typeof set]
+  return [query, set] as [Partial<T> | undefined, typeof set]
 }
 
 export default useQuery

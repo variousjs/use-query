@@ -7,12 +7,15 @@ const random = () => Math.ceil((Math.random() * (10 - 1) + 1))
 
 const Entry = () => {
   const [query, setQuery] = useQuery<{
-    ids?: number[],
-    size?: number,
-    next?: number,
+    ids: number[],
+    names: string[],
+    size: number,
+    next: string,
   }>({
     ids: 'number[]',
     size: 'number',
+    next: 'string',
+    names: 'string[]',
   })
 
   useEffect(() => {
@@ -33,19 +36,34 @@ const Entry = () => {
       }
       <button
         onClick={() => {
-          setQuery({ ids: [random(), random()], size: random() })
+          setQuery({
+            ids: [random(), random()],
+            size: random(),
+            names: random() > 5 ? [random().toString(), random().toString()] : [],
+          })
         }}
       >
         Random
       </button>
       {
-        query?.size ? <button
+        query && !query.next ? <button
           style={{ marginLeft: 10 }}
           onClick={() => {
-            setQuery({ next: random() })
+            setQuery({ next: random().toString() })
           }}
         >
           Append
+        </button> : null
+      }
+      {
+        query?.next ? <button
+          style={{ marginLeft: 10 }}
+          onClick={() => {
+            const { next, ...rest } = query
+            setQuery(rest, true)
+          }}
+        >
+          Subtract
         </button> : null
       }
       <button
