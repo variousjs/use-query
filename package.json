@@ -1,13 +1,22 @@
 {
-  "name": "vite-react-swc",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@variousjs/use-query",
+  "version": "0.1.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "keywords": [
+    "query",
+    "router",
+    "location search"
+  ],
+  "author": "LoeiFy <LoeiFy@gmail.com>",
+  "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-router-dom": "^5.3.3"
