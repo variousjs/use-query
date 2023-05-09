@@ -8,6 +8,9 @@
   "files": [
     "dist"
   ],
+  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
