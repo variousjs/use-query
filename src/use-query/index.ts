@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 type QueryObject = Record<string, string | number | string[] | number[] | undefined>
 type Types<T extends QueryObject> = Record<
@@ -8,7 +8,7 @@ type Types<T extends QueryObject> = Record<
 >
 
 function useQuery<T extends QueryObject>(types?: Partial<Types<T>>) {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { search } = useLocation()
   const queryArgs = useRef<QueryObject>({})
   const [query, setQuery] = useState<QueryObject>()
@@ -47,7 +47,7 @@ function useQuery<T extends QueryObject>(types?: Partial<Types<T>>) {
     const next = replace ? args : { ...queryArgs.current, ...args }
     queryArgs.current = next
     const query = new URLSearchParams(next as Record<string, any>)
-    history.replace({ search: query.toString() })
+    navigate(`?${query.toString()}`, { replace: true })
   }
 
   return [query, set] as [Partial<T> | undefined, typeof set]

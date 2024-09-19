@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import useQuery from './use-query'
 
 const random = () => Math.ceil((Math.random() * (10 - 1) + 1))
@@ -80,8 +80,8 @@ const Entry = () => {
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <HashRouter>
+    <Router>
       <Entry />
-    </HashRouter>
+    </Router>
   </React.StrictMode>,
 )

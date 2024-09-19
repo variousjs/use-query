@@ -5,6 +5,9 @@ export default defineConfig({
     outDir: './dist',
     rollupOptions: {
       external: ["react", "react-router-dom"],
+      output: {
+        exports: 'named',
+      },
     },
     minify: false,
     lib: {
