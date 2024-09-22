@@ -45,6 +45,11 @@ function useQuery<T extends QueryObject>(types?: Partial<Types<T>>) {
 
   const set = (args: Partial<T>, replace?: boolean) => {
     const next = replace ? args : { ...queryArgs.current, ...args }
+    for (const n in next) {
+      if (next[n] === undefined || next[n] === null) {
+        delete next[n]
+      }
+    }
     queryArgs.current = next
     const query = new URLSearchParams(next as Record<string, any>)
     navigate(`?${query.toString()}`, { replace: true })

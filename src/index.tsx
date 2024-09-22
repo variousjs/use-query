@@ -40,6 +40,7 @@ const Entry = () => {
             ids: [random(), random()],
             size: random(),
             names: random() > 5 ? [random().toString(), random().toString()] : [],
+            next: undefined,
           })
         }}
       >
